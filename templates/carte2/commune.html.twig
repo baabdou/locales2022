@@ -1,0 +1,554 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+<!-- Content -->
+<section style="padding-top:1em;">
+  <h3>Résultat par commune</h3>
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#table">Tableau</a></li>
+    <li><a data-toggle="tab" href="#graph">graphe</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="table" class="tab-pane fade in active">
+      <h3></h3>
+      <div class="table-responsive">
+      <table class="table table-sm table-hover table-bordered">
+          <thead>
+          <tr>
+            <th>Commune</th>
+            <th>Nombre d'électeur</th>
+            <th>Nombre d'inscrit</th>
+            <th>Nombre de votant</th>
+            <th>Nombre de bulletin nul</th>
+            <th>Nombre de suffrage valablement exprime</th>
+            <th>Nombre de voix hors bureau</th>
+
+
+
+
+            <!--
+            <th>Id</th>
+            <th>Region</th>
+            <th>Departement</th>
+            <th>Arrondissement</th>
+            <th>Commune</th>
+            <th>Implantation</th>
+            <th>NombreElecteur</th>
+            <th>NombreInscrit</th>
+            <th>NombreVotant</th>
+            <th>NombreBulletinNul</th>
+            <th>NombreSuffrageValablementExprime</th>
+            <th>NombreVoixHorsBureau</th>
+            <th>ResultatDepartement</th>
+            <th>ResultatCommuneVille</th>
+            <th>ResultatCommune</th>
+            <th>actions</th>
+            -->
+          </tr>
+          </thead>
+          <tbody>
+          {% for carte2 in carte2s %}
+          <tr>
+            <td>{{ carte2.resultatCommune }}</td>
+            <td>{{ carte2.nombreElecteur }}</td>
+            <td>{{ carte2.nombreInscrit }}</td>
+            <td>{{ carte2.nombreVotant }}</td>
+            <td>{{ carte2.nombreBulletinNul }}</td>
+            <td>{{ carte2.nombreSuffrageValablementExprime }}</td>
+            <td>{{ carte2.nombreVoixHorsBureau }}</td>
+
+
+            <!--
+            <td>{{ carte2.id }}</td>
+            <td>{{ carte2.region }}</td>
+            <td>{{ carte2.departement }}</td>
+            <td>{{ carte2.arrondissement }}</td>
+            <td>{{ carte2.commune }}</td>
+            <td>{{ carte2.implantation }}</td>
+            <td>{{ carte2.nombreElecteur }}</td>
+            <td>{{ carte2.nombreInscrit }}</td>
+            <td>{{ carte2.nombreVotant }}</td>
+            <td>{{ carte2.nombreBulletinNul }}</td>
+            <td>{{ carte2.nombreSuffrageValablementExprime }}</td>
+            <td>{{ carte2.nombreVoixHorsBureau }}</td>
+            <td>{{ carte2.resultatDepartement }}</td>
+            <td>{{ carte2.resultatCommuneVille }}</td>
+            <td>{{ carte2.resultatCommune }}</td>
+            <td>
+              <a href="{{ path('carte2_show', {'id': carte2.id}) }}">show</a>
+              <a href="{{ path('carte2_edit', {'id': carte2.id}) }}">edit</a>
+            </td>
+            -->
+          </tr>
+          {% else %}
+          <tr>
+            <td colspan="16">no records found</td>
+          </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div id="graph" class="tab-pane fade">
+      <div class="row">
+        <div class="col-6 col-12-small">
+          <div id="chart1"></div>
+        </div>
+        <div class="col-6 col-12-small">
+          <div id="chart2"></div>
+        </div>
+        <div class="col-12 col-12-small">
+          <div id="chart3"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+</section>
+
+
+{% endblock %}
+
+
+
+
+{% block javascript %}
+
+<script>
+  Highcharts.chart('chart1', {
+    chart: {
+      plotBackgroundColor: null,
+      plotBorderWidth: null,
+      plotShadow: false,
+      type: 'pie'
+    },
+    title: {
+      text: 'Browser market shares in January, 2018'
+    },
+    tooltip: {
+      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    accessibility: {
+      point: {
+        valueSuffix: '%'
+      }
+    },
+    plotOptions: {
+      pie: {
+        allowPointSelect: true,
+        cursor: 'pointer',
+        dataLabels: {
+          enabled: true,
+          format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+        }
+      }
+    },
+    series: [{
+      name: 'Brands',
+      colorByPoint: true,
+      data: [{
+        name: 'Chrome',
+        y: 61.41,
+        sliced: true,
+        selected: true
+      }, {
+        name: 'Internet Explorer',
+        y: 11.84
+      }, {
+        name: 'Firefox',
+        y: 10.85
+      }, {
+        name: 'Edge',
+        y: 4.67
+      }, {
+        name: 'Safari',
+        y: 4.18
+      }, {
+        name: 'Sogou Explorer',
+        y: 1.64
+      }, {
+        name: 'Opera',
+        y: 1.6
+      }, {
+        name: 'QQ',
+        y: 1.2
+      }, {
+        name: 'Other',
+        y: 2.61
+      }]
+    }]
+  });
+
+
+  Highcharts.chart('chart2', {
+    chart: {
+      type: 'pie'
+    },
+    title: {
+      text: 'Browser market shares. January, 2018'
+    },
+    subtitle: {
+      text: 'Click the slices to view versions. Source: <a href="http://statcounter.com" target="_blank">statcounter.com</a>'
+    },
+
+    accessibility: {
+      announceNewData: {
+        enabled: true
+      },
+      point: {
+        valueSuffix: '%'
+      }
+    },
+
+    plotOptions: {
+      series: {
+        dataLabels: {
+          enabled: true,
+          format: '{point.name}: {point.y:.1f}%'
+        }
+      }
+    },
+
+    tooltip: {
+      headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+      pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+    },
+
+    series: [
+      {
+        name: "Browsers",
+        colorByPoint: true,
+        data: [
+          {
+            name: "Chrome",
+            y: 62.74,
+            drilldown: "Chrome"
+          },
+          {
+            name: "Firefox",
+            y: 10.57,
+            drilldown: "Firefox"
+          },
+          {
+            name: "Internet Explorer",
+            y: 7.23,
+            drilldown: "Internet Explorer"
+          },
+          {
+            name: "Safari",
+            y: 5.58,
+            drilldown: "Safari"
+          },
+          {
+            name: "Edge",
+            y: 4.02,
+            drilldown: "Edge"
+          },
+          {
+            name: "Opera",
+            y: 1.92,
+            drilldown: "Opera"
+          },
+          {
+            name: "Other",
+            y: 7.62,
+            drilldown: null
+          }
+        ]
+      }
+    ],
+    drilldown: {
+      series: [
+        {
+          name: "Chrome",
+          id: "Chrome",
+          data: [
+            [
+              "v65.0",
+              0.1
+            ],
+            [
+              "v64.0",
+              1.3
+            ],
+            [
+              "v63.0",
+              53.02
+            ],
+            [
+              "v62.0",
+              1.4
+            ],
+            [
+              "v61.0",
+              0.88
+            ],
+            [
+              "v60.0",
+              0.56
+            ],
+            [
+              "v59.0",
+              0.45
+            ],
+            [
+              "v58.0",
+              0.49
+            ],
+            [
+              "v57.0",
+              0.32
+            ],
+            [
+              "v56.0",
+              0.29
+            ],
+            [
+              "v55.0",
+              0.79
+            ],
+            [
+              "v54.0",
+              0.18
+            ],
+            [
+              "v51.0",
+              0.13
+            ],
+            [
+              "v49.0",
+              2.16
+            ],
+            [
+              "v48.0",
+              0.13
+            ],
+            [
+              "v47.0",
+              0.11
+            ],
+            [
+              "v43.0",
+              0.17
+            ],
+            [
+              "v29.0",
+              0.26
+            ]
+          ]
+        },
+        {
+          name: "Firefox",
+          id: "Firefox",
+          data: [
+            [
+              "v58.0",
+              1.02
+            ],
+            [
+              "v57.0",
+              7.36
+            ],
+            [
+              "v56.0",
+              0.35
+            ],
+            [
+              "v55.0",
+              0.11
+            ],
+            [
+              "v54.0",
+              0.1
+            ],
+            [
+              "v52.0",
+              0.95
+            ],
+            [
+              "v51.0",
+              0.15
+            ],
+            [
+              "v50.0",
+              0.1
+            ],
+            [
+              "v48.0",
+              0.31
+            ],
+            [
+              "v47.0",
+              0.12
+            ]
+          ]
+        },
+        {
+          name: "Internet Explorer",
+          id: "Internet Explorer",
+          data: [
+            [
+              "v11.0",
+              6.2
+            ],
+            [
+              "v10.0",
+              0.29
+            ],
+            [
+              "v9.0",
+              0.27
+            ],
+            [
+              "v8.0",
+              0.47
+            ]
+          ]
+        },
+        {
+          name: "Safari",
+          id: "Safari",
+          data: [
+            [
+              "v11.0",
+              3.39
+            ],
+            [
+              "v10.1",
+              0.96
+            ],
+            [
+              "v10.0",
+              0.36
+            ],
+            [
+              "v9.1",
+              0.54
+            ],
+            [
+              "v9.0",
+              0.13
+            ],
+            [
+              "v5.1",
+              0.2
+            ]
+          ]
+        },
+        {
+          name: "Edge",
+          id: "Edge",
+          data: [
+            [
+              "v16",
+              2.6
+            ],
+            [
+              "v15",
+              0.92
+            ],
+            [
+              "v14",
+              0.4
+            ],
+            [
+              "v13",
+              0.1
+            ]
+          ]
+        },
+        {
+          name: "Opera",
+          id: "Opera",
+          data: [
+            [
+              "v50.0",
+              0.96
+            ],
+            [
+              "v49.0",
+              0.82
+            ],
+            [
+              "v12.1",
+              0.14
+            ]
+          ]
+        }
+      ]
+    }
+  });
+
+
+  Highcharts.chart('chart3', {
+    chart: {
+      type: 'bar'
+    },
+    title: {
+      text: 'Historic World Population by Region'
+    },
+    subtitle: {
+      text: 'Source: <a href="https://en.wikipedia.org/wiki/World_population">Wikipedia.org</a>'
+    },
+    xAxis: {
+      categories: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
+      title: {
+        text: null
+      }
+    },
+    yAxis: {
+      min: 0,
+      title: {
+        text: 'Population (millions)',
+        align: 'high'
+      },
+      labels: {
+        overflow: 'justify'
+      }
+    },
+    tooltip: {
+      valueSuffix: ' millions'
+    },
+    plotOptions: {
+      bar: {
+        dataLabels: {
+          enabled: true
+        }
+      }
+    },
+    legend: {
+      layout: 'vertical',
+      align: 'right',
+      verticalAlign: 'top',
+      x: -40,
+      y: 80,
+      floating: true,
+      borderWidth: 1,
+      backgroundColor:
+        Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+      shadow: true
+    },
+    credits: {
+      enabled: false
+    },
+    series: [{
+      name: 'Year 1800',
+      data: [107, 31, 635, 203, 2]
+    }, {
+      name: 'Year 1900',
+      data: [133, 156, 947, 408, 6]
+    }, {
+      name: 'Year 2000',
+      data: [814, 841, 3714, 727, 31]
+    }, {
+      name: 'Year 2016',
+      data: [1216, 1001, 4436, 738, 40]
+    }]
+  });
+</script>
+{% endblock %}

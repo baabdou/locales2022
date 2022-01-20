@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Carte2{% endblock %}
+
+{% block body %}
+    <h1>Carte2</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ carte2.id }}</td>
+            </tr>
+            <tr>
+                <th>Region</th>
+                <td>{{ carte2.region }}</td>
+            </tr>
+            <tr>
+                <th>Departement</th>
+                <td>{{ carte2.departement }}</td>
+            </tr>
+            <tr>
+                <th>Arrondissement</th>
+                <td>{{ carte2.arrondissement }}</td>
+            </tr>
+            <tr>
+                <th>Commune</th>
+                <td>{{ carte2.commune }}</td>
+            </tr>
+            <tr>
+                <th>Implantation</th>
+                <td>{{ carte2.implantation }}</td>
+            </tr>
+            <tr>
+                <th>NombreElecteur</th>
+                <td>{{ carte2.nombreElecteur }}</td>
+            </tr>
+            <tr>
+                <th>NombreInscrit</th>
+                <td>{{ carte2.nombreInscrit }}</td>
+            </tr>
+            <tr>
+                <th>NombreVotant</th>
+                <td>{{ carte2.nombreVotant }}</td>
+            </tr>
+            <tr>
+                <th>NombreBulletinNul</th>
+                <td>{{ carte2.nombreBulletinNul }}</td>
+            </tr>
+            <tr>
+                <th>NombreSuffrageValablementExprime</th>
+                <td>{{ carte2.nombreSuffrageValablementExprime }}</td>
+            </tr>
+            <tr>
+                <th>NombreVoixHorsBureau</th>
+                <td>{{ carte2.nombreVoixHorsBureau }}</td>
+            </tr>
+            <tr>
+                <th>ResultatDepartement</th>
+                <td>{{ carte2.resultatDepartement }}</td>
+            </tr>
+            <tr>
+                <th>ResultatCommuneVille</th>
+                <td>{{ carte2.resultatCommuneVille }}</td>
+            </tr>
+            <tr>
+                <th>ResultatCommune</th>
+                <td>{{ carte2.resultatCommune }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('carte2_index') }}">back to list</a>
+
+    <a href="{{ path('carte2_edit', {'id': carte2.id}) }}">edit</a>
+
+    {{ include('carte2/_delete_form.html.twig') }}
+{% endblock %}

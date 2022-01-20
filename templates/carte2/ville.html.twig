@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+<!-- Content -->
+<section style="padding-top:1em;">
+  <h3>Résultat par commune de ville</h3>
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#table">Tableau</a></li>
+    <li><a data-toggle="tab" href="#graph">graphe</a></li>
+  </ul>
+  <div class="tab-content">
+    <div id="table" class="tab-pane fade in active">
+      <h3></h3>
+      <div class="table-wrapper">
+        <table class="alt">
+          <thead>
+          <tr>
+            <th>Ville</th>
+            <th>Nombre d'électeur</th>
+            <th>Nombre d'inscrit</th>
+            <th>Nombre de votant</th>
+            <th>Nombre de bulletin nul</th>
+            <th>Nombre de suffrage valablement exprime</th>
+            <th>Nombre de voix hors bureau</th>
+
+
+
+
+            <!--
+            <th>Id</th>
+            <th>Region</th>
+            <th>Departement</th>
+            <th>Arrondissement</th>
+            <th>Commune</th>
+            <th>Implantation</th>
+            <th>NombreElecteur</th>
+            <th>NombreInscrit</th>
+            <th>NombreVotant</th>
+            <th>NombreBulletinNul</th>
+            <th>NombreSuffrageValablementExprime</th>
+            <th>NombreVoixHorsBureau</th>
+            <th>ResultatDepartement</th>
+            <th>ResultatCommuneVille</th>
+            <th>ResultatCommune</th>
+            <th>actions</th>
+            -->
+          </tr>
+          </thead>
+          <tbody>
+          {% for carte2 in carte2s %}
+          <tr>
+            <td>{{ carte2.resultatCommuneVille }}</td>
+            <td>{{ carte2.nombreElecteur }}</td>
+            <td>{{ carte2.nombreInscrit }}</td>
+            <td>{{ carte2.nombreVotant }}</td>
+            <td>{{ carte2.nombreBulletinNul }}</td>
+            <td>{{ carte2.nombreSuffrageValablementExprime }}</td>
+            <td>{{ carte2.nombreVoixHorsBureau }}</td>
+
+
+            <!--
+            <td>{{ carte2.id }}</td>
+            <td>{{ carte2.region }}</td>
+            <td>{{ carte2.departement }}</td>
+            <td>{{ carte2.arrondissement }}</td>
+            <td>{{ carte2.commune }}</td>
+            <td>{{ carte2.implantation }}</td>
+            <td>{{ carte2.nombreElecteur }}</td>
+            <td>{{ carte2.nombreInscrit }}</td>
+            <td>{{ carte2.nombreVotant }}</td>
+            <td>{{ carte2.nombreBulletinNul }}</td>
+            <td>{{ carte2.nombreSuffrageValablementExprime }}</td>
+            <td>{{ carte2.nombreVoixHorsBureau }}</td>
+            <td>{{ carte2.resultatDepartement }}</td>
+            <td>{{ carte2.resultatCommuneVille }}</td>
+            <td>{{ carte2.resultatCommune }}</td>
+            <td>
+              <a href="{{ path('carte2_show', {'id': carte2.id}) }}">show</a>
+              <a href="{{ path('carte2_edit', {'id': carte2.id}) }}">edit</a>
+            </td>
+            -->
+          </tr>
+          {% else %}
+          <tr>
+            <td colspan="16">no records found</td>
+          </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div id="graph" class="tab-pane fade">
+      <h3>Menu 1</h3>
+      <p>Some content in menu 1.</p>
+    </div>
+  </div>
+
+
+
+</section>
+
+
+{% endblock %}

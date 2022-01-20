@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+<!-- Content -->
+<section style="padding-top:1em;">
+  <div class="container">
+    <div class="row align-items-start">
+      <div class="col-sm-10"><h4>Carte nationnale</h4></div>
+      <div class="col-sm-2"><a href="#" class="button primary small">Passer en mode édition</a></div>
+    </div>
+  </div>
+  <h4></h4>
+  <!--
+  <h4>Carte nationnale</h4>
+  <a href="#" class="button primary small pull-right">Passer en mode édition</a>
+  -->
+  <div class="table-responsive">
+    <table class="table table-sm table-hover table-bordered">
+      <thead>
+      <tr>
+        <th>Id</th>
+        <!-- <th>Region</th> -->
+        <th>Departement</th>
+        <!-- <th>Arrondissement</th> -->
+        <th>Commune</th>
+        <th>Implantation</th>
+        <th>NombreElecteur</th>
+
+        <!-- <th>actions</th> -->
+      </tr>
+      </thead>
+      <tbody>
+      {% for carte2 in carte2s %}
+      <tr>
+        <td>{{ carte2.id }}</td>
+        <!-- <td>{{ carte2.region }}</td> -->
+        <td>{{ carte2.departement }}</td>
+        <!-- <td>{{ carte2.arrondissement }}</td> -->
+        <td>{{ carte2.commune }}</td>
+        <td>{{ carte2.implantation }}</td>
+        <td>{{ carte2.nombreElecteur }}</td>
+
+        <!--
+        <td>
+          <a href="{{ path('carte2_show', {'id': carte2.id}) }}">show</a>
+          <a href="{{ path('carte2_edit', {'id': carte2.id}) }}">edit</a>
+        </td>
+        -->
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="16">no records found</td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+</section>
+
+
+{% endblock %}
